@@ -1,0 +1,69 @@
+/* window-bar.component.css */
+:host {
+  --wb-radius: 12px 12px 0 0;
+  --wb-border: 1px solid rgba(0,0,0,0.1);
+  --wb-header-h: 40px;
+  --wb-bg: #fff;
+  --wb-header-bg: #f6f7f9;
+  --wb-fg: #111;
+}
+
+.wb {
+  display: grid;
+  grid-template-rows: var(--wb-header-h) 1fr;
+  background: var(--wb-bg);
+  color: var(--wb-fg);
+  border: var(--wb-border);
+  border-radius: var(--wb-radius);
+  overflow: clip;
+  height: 40px;
+}
+
+.wb-header {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  background: var(--wb-header-bg);
+  border-bottom: var(--wb-border);
+}
+
+.wb-left, .wb-right {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+
+.wb-title {
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wb-icon {
+  width: 18px;
+  height: 18px;
+  opacity: .8;
+}
+
+.wb-close {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.wb-close:focus-visible {
+  outline: 2px solid #2684ff;
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+
+.wb-body {
+  padding: 12px;
+}

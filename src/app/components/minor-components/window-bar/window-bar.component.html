@@ -1,0 +1,21 @@
+<div class="wb">
+  <header class="wb-header" role="banner">
+    <div class="wb-left" aria-hidden="true">
+      <ng-content select="[windowIcon]"></ng-content>
+      <svg *ngIf="!iconSlot" class="wb-icon" viewBox="0 0 24 24" focusable="false">
+        <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+      </svg>
+    </div>
+
+    <div class="wb-title" [attr.title]="title">{{ title }}</div>
+
+    <div class="wb-right">
+      <button *ngIf="showClose" type="button" class="wb-close" aria-label="Zamknij" (click)="onClose()">
+        <ng-content select="[windowClose]"></ng-content>
+        <svg *ngIf="!closeSlot" class="wb-icon" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+          <path d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+</div>

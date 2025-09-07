@@ -1,4 +1,18 @@
 
 <main class="container">
+<app-menu></app-menu>
+
+<div class="windows-container">
+
+    <!-- About -->
+    <div #window1 cdkDrag cdkDragBoundary="body" [hidden]="!layoutService.aboutWindowVisibility()"  class="window-wrapper">
+    <app-window-bar style="pointer-events: all;" cdkDragHandle [title]="'About'" [showClose]="true" (close)="layoutService.aboutWindowVisibility.set(false)">
+    </app-window-bar>
+        <div #about class="window">
+            <app-about></app-about>
+        </div>
+    </div>
+
+</div>
 
 </main>
