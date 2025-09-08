@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 
 import { invoke } from "@tauri-apps/api/core";
 import { MenuComponent } from './components/menu/menu.component';
@@ -7,6 +7,7 @@ import {CdkDrag, CdkDragHandle} from "@angular/cdk/drag-drop"
 import { LayoutService } from './services/layout.service';
 import { WindowBarComponent } from './components/minor-components/window-bar/window-bar.component';
 import { SettingsComponent } from "./components/settings/settings.component";
+import WaveSurfer from "wavesurfer.js"
 import { VoskService } from './services/vosk.service';
 import { VoskVanillaResult } from './models/vosk';
 
@@ -16,7 +17,7 @@ import { VoskVanillaResult } from './models/vosk';
     styleUrl: './app.component.css',
     imports: [MenuComponent, AboutComponent, CdkDrag, WindowBarComponent, CdkDragHandle, SettingsComponent]
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
 
   greet(event: SubmitEvent, name: string): void {
     event.preventDefault();
@@ -33,6 +34,17 @@ export class AppComponent {
   constructor(private _layoutService: LayoutService)
   {
     this.layoutService = _layoutService;
+  }
+
+  ngAfterViewInit(): void {
+    const waveSurfer = WaveSurfer.create({
+      container: '#waveformtest',
+      url: 'assets/TANDI2.wav'
+    });
+
+    waveSurfer.on('interaction', () => {
+        waveSurfer.play()
+    })
   }
 
   async getTransription(): Promise<VoskVanillaResult> {
