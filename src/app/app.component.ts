@@ -6,6 +6,7 @@ import { AboutComponent } from "./components/about/about.component";
 import {CdkDrag, CdkDragHandle} from "@angular/cdk/drag-drop"
 import { LayoutService } from './services/layout.service';
 import { WindowBarComponent } from './components/minor-components/window-bar/window-bar.component';
+import { SettingsComponent } from "./components/settings/settings.component";
 import { VoskService } from './services/vosk.service';
 import { VoskVanillaResult } from './models/vosk';
 
@@ -13,7 +14,7 @@ import { VoskVanillaResult } from './models/vosk';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [MenuComponent, AboutComponent, CdkDrag, WindowBarComponent, CdkDragHandle]
+    imports: [MenuComponent, AboutComponent, CdkDrag, WindowBarComponent, CdkDragHandle, SettingsComponent]
 })
 export class AppComponent {
 

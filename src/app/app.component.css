@@ -40,6 +40,7 @@
 }
 
 .window-wrapper {
+    position: absolute;
     resize: both;
     overflow: hidden;
     pointer-events: all;

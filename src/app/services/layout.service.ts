@@ -4,4 +4,5 @@ import { Injectable, signal, Signal } from "@angular/core";
 
 export class LayoutService {
     aboutWindowVisibility = signal(false);
+    settingsWindowVisibility = signal(false);
 }

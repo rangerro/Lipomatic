@@ -35,4 +35,8 @@ export class MenuComponent {
   onAboutClick(){
     this.layoutService.aboutWindowVisibility.set(true);
   }
+
+  onSettingsClick() {
+    this.layoutService.settingsWindowVisibility.set(true);
+  }
 }

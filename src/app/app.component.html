@@ -19,6 +19,14 @@
         </div>
     </div>
 
+    <!-- Settings -->
+    <div #window1 cdkDrag cdkDragBoundary="body" [hidden]="!layoutService.settingsWindowVisibility()"  class="window-wrapper">
+    <app-window-bar style="pointer-events: all;" cdkDragHandle [title]="'Settings'" [showClose]="true" (close)="layoutService.settingsWindowVisibility.set(false)">
+    </app-window-bar>
+        <div #about class="window">
+            <app-settings></app-settings>
+        </div>
+    </div>
 
 </div>
 
