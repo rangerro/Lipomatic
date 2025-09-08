@@ -5,7 +5,7 @@
 
 
 
-<button (click)="setTransriptionAsText()">Button</button>
+<button (click)="setTransriptionAsText()" style="display: flex; gap: 5px; justify-content: center;">Button <div *ngIf="awaitingForTranscription" class="spinner"></div></button>
 
 <pre>{{voskOutput}}</pre>
 <div class="windows-container">

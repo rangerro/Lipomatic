@@ -10,12 +10,13 @@ import { SettingsComponent } from "./components/settings/settings.component";
 import WaveSurfer from "wavesurfer.js"
 import { VoskService } from './services/vosk.service';
 import { VoskVanillaResult } from './models/vosk';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [MenuComponent, AboutComponent, CdkDrag, WindowBarComponent, CdkDragHandle, SettingsComponent]
+    imports: [CommonModule, MenuComponent, AboutComponent, CdkDrag, WindowBarComponent, CdkDragHandle, SettingsComponent]
 })
 export class AppComponent implements AfterViewInit {
 
@@ -29,6 +30,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   voskOutput: string = '';
+  awaitingForTranscription = false;
 
   layoutService: LayoutService;
   constructor(private _layoutService: LayoutService)
@@ -58,8 +60,17 @@ export class AppComponent implements AfterViewInit {
   }
 
   async setTransriptionAsText() {
-    const transcription = await this.getTransription();
-    const resultText = JSON.stringify(transcription);
-    this.voskOutput = resultText;
+    try{
+      this.awaitingForTranscription = true;
+      const transcription = await this.getTransription();
+      const resultText = JSON.stringify(transcription);
+      this.voskOutput = resultText;
+    }
+    catch{
+
+    }
+    finally {
+      this.awaitingForTranscription = false;
+    }
   }
 }
