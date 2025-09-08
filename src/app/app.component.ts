@@ -6,6 +6,8 @@ import { AboutComponent } from "./components/about/about.component";
 import {CdkDrag, CdkDragHandle} from "@angular/cdk/drag-drop"
 import { LayoutService } from './services/layout.service';
 import { WindowBarComponent } from './components/minor-components/window-bar/window-bar.component';
+import { VoskService } from './services/vosk.service';
+import { VoskVanillaResult } from './models/vosk';
 
 @Component({
     selector: 'app-root',
@@ -14,20 +16,37 @@ import { WindowBarComponent } from './components/minor-components/window-bar/win
     imports: [MenuComponent, AboutComponent, CdkDrag, WindowBarComponent, CdkDragHandle]
 })
 export class AppComponent {
-  greetingMessage = "";
 
   greet(event: SubmitEvent, name: string): void {
     event.preventDefault();
 
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
     invoke<string>("greet", { name }).then((text) => {
-      this.greetingMessage = text;
+      const newText = text;
     });
   }
+
+  voskOutput: string = '';
 
   layoutService: LayoutService;
   constructor(private _layoutService: LayoutService)
   {
     this.layoutService = _layoutService;
+  }
+
+  async getTransription(): Promise<VoskVanillaResult> {
+    const voskService = new VoskService();
+    await voskService.init();
+    const wavFileRaw = await fetch(`assets/TANDI2.wav`);
+    const blob = await wavFileRaw.blob();
+    const file = new File([blob], 'TANDI2');
+    const result = await voskService.transcribe(file);
+    return result;
+  }
+
+  async setTransriptionAsText() {
+    const transcription = await this.getTransription();
+    const resultText = JSON.stringify(transcription);
+    this.voskOutput = resultText;
   }
 }
