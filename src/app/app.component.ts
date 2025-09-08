@@ -66,8 +66,8 @@ export class AppComponent implements AfterViewInit {
       const resultText = JSON.stringify(transcription);
       this.voskOutput = resultText;
     }
-    catch{
-
+    catch(e){
+      console.error('Transcription error', e);
     }
     finally {
       this.awaitingForTranscription = false;
